@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Configuration; // needed for _connectionString
 using System.Data.SqlClient; // needed for SqlConnection
 using a2ssdqub.Models; // to link to Models folder full of class-representations
@@ -13,28 +9,30 @@ namespace a2ssdqub.DAL
     {
         private static string _connectionString = ConfigurationManager.ConnectionStrings["konekt"].ConnectionString;
 
-        public static int AddNewCustomer(Customer Cus)
+        public static int Add(Customer customer)
         {
             int lastID = -1; // -1 suggests failed INSERT, looks like T for Trouble
 
-            using(SqlConnection connection = new SqlConnection(_connectionString))
+            using(var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                // Syntax with TRANSACTION notation: with option of ROLLBACK instead of COMMIT if it fails
-                // string sqlQuery = string.Format("BEGIN TRANSACTION; INSERT INTO CUSTOMERS OUTPUT INSERTED.CustID VALUES('{0}','{1}','{2}'); COMMIT;", fname, dob, sex);
-                string sqlQuery = string.Format("INSERT INTO CUSTOMERS OUTPUT INSERTED.CustID VALUES('{0}','{1}','{2}');", Cus.Fname, Cus.GetFormattedDate(), Cus.Sex);
-                SqlCommand insertCommand = new SqlCommand(sqlQuery, connection);
 
-                // int newlyMadeID = insertCommand.ExecuteNonQuery();
+                var query = string.Format(@"
+                    INSERT INTO CUSTOMERS 
+                    OUTPUT INSERTED.CustID 
+                    VALUES('{0}','{1}','{2}');", 
+                    customer.Fname, customer.GetFormattedDate(), customer.Sex);
 
-                lastID = (int) insertCommand.ExecuteScalar(); // returns a SCALAR (a value object), would need an int? type
+                var command = new SqlCommand(query, connection);
+
+                lastID = (int) command.ExecuteScalar(); 
 
                 connection.Close();
                 return lastID;
             }
         }
 
-        public static int UpdateCustomer(Customer Cus)
+        public static bool Update(Customer customer)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -43,81 +41,98 @@ namespace a2ssdqub.DAL
                 var query = string.Format(@"UPDATE CUSTOMERS 
                     SET Forename = '{0}', DoB = '{1}', Gender = '{2}' 
                     WHERE CustID = '{3}';", 
-                    Cus.Fname, Cus.Dob, Cus.Sex, 
-                    Cus.CusID);
+                    customer.Fname, customer.Dob, customer.Sex, 
+                    customer.CusID);
             
                 int rowsAffected = (new SqlCommand(query, connection)).ExecuteNonQuery();
 
                 connection.Close();
 
-                return rowsAffected;
+                return rowsAffected == 1;
             }
         }
 
-        public static int DeleteCustomer(int cusID) // better name: DeleteCusByID
+        /**
+         * Deletes a single customer, specified by it's ID.
+         */
+        public static int Delete(int id) // better name: DeleteCusByID
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                // No asterisk
-                string sqlQuery = string.Format("DELETE FROM CUSTOMERS WHERE CustID = {0}", cusID);
-                SqlCommand delCommand = new SqlCommand(sqlQuery, connection);
-                int rowsAffected = delCommand.ExecuteNonQuery();
+                
+                var query = string.Format(@"
+                    DELETE FROM Customers 
+                    WHERE CustID = {0}", 
+                    id
+                );
+
+                var command = new SqlCommand(query, connection);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
                 connection.Close();
+
                 return rowsAffected;
             }
         }
 
-        public static List<Customer> GetListOfCustomers()
+        public static List<Customer> Get()
         {
-            List<Customer> customerDetails = new List<Customer>();
+            var customerDetails = new List<Customer>();
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-
-                // Constructs the command
-                SqlCommand getAll = new SqlCommand("SELECT * FROM CUSTOMERS ORDER BY CUSTOMERS.CustID ASC", connection);
+              
+                SqlCommand command = new SqlCommand(@"
+                    SELECT * 
+                    FROM Customers 
+                    ORDER BY CustID", 
+                    connection
+                );
 
                 // Executes the early stages of doing the command by figuring out how many results there'll be
                 // Ensures size of result set isn't egregious
-                SqlDataReader reader = getAll.ExecuteReader();
+                var reader = command.ExecuteReader();
 
                 // iterate through the result set; each iteration is 1 record
-                while(reader.Read())
-                {
-                    // This is where the mapping between the SQL data type and C# data type is controlled
-                    // It adds further direction to the List and the Model
-                    customerDetails.Add(new Customer(reader.GetInt32(0), reader.GetString(1), reader.GetDateTime(2), reader[3].ToString()));
-                }
-
+                while(reader.Read()) customerDetails.Add(new Customer(
+                    reader.GetInt32(0), 
+                    reader.GetString(1), 
+                    reader.GetDateTime(2), 
+                    reader.GetString(3)
+                ));
+      
                 connection.Close();
 
                 return customerDetails;
             }
         }
 
-        public static string[] GetCustomer(int cid)
+        public static Customer Get(int id)
         {
-            string[] soughtData = { "","","" };
+            Customer customer = null;
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                SqlCommand getAll = new SqlCommand(string.Format("SELECT CustID, Forename, DoB, Gender FROM CUSTOMERS WHERE CustID = {0}",cid), connection);
 
-                SqlDataReader reader = getAll.ExecuteReader();
+                var command = new SqlCommand(string.Format(@"
+                    SELECT CustID, Forename, DoB, Gender 
+                    FROM Customers 
+                    WHERE CustID = {0}", 
+                    id
+                ), 
+                connection);
 
-                if(reader.Read())
-                {
-                    soughtData[0] = reader[1].ToString();
-                    soughtData[1] = reader.GetDateTime(2).ToString();
-                    soughtData[2] = reader[3].ToString();
-                }
+                var r = command.ExecuteReader();
+
+                if (r.Read()) customer = new Customer(id, r.GetString(1), r.GetDateTime(2), r.GetString(3));
 
                 connection.Close();
 
-                return soughtData;
+                return customer;
             }
         }
     }

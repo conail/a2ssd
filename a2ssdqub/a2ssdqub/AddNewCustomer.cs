@@ -37,7 +37,7 @@ namespace a2ssdqub
 
             if (txtForename.Text != "" && datDob.Text != "" && checkedButton.Text != "")
             {
-                int newlyMadeID = CustomerDAL.AddNewCustomer(new Customer(txtForename.Text, datDob.Value, checkedButton.Text));
+                int newlyMadeID = CustomerDAL.Add(new Customer(txtForename.Text, datDob.Value, checkedButton.Text));
 
                 if(newlyMadeID > -1)
                 {

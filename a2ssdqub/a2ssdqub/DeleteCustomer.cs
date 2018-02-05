@@ -33,26 +33,19 @@ namespace a2ssdqub
 
         private void btnDelCus_Click(object sender, EventArgs e)
         {
-            CustomerDAL.DeleteCustomer(int.Parse(comAllCus.SelectedValue.ToString()));
+            CustomerDAL.Delete((int) comAllCus.SelectedValue);
 
             // comAllCus.SelectedValue would give just the cusID
             MessageBox.Show("YOU HAVE JUST DELETED " + comAllCus.Text);
 
-            // Refresh the combo box
             refreshCombo();
         }
 
         private void refreshCombo()
         {
-            List<Customer> comboVals  = CustomerDAL.GetListOfCustomers();
-            // null - binds 1 property of the comboVals to the comboBox, but we won't
-            // to ensure both the key and value are available
-            // instead of replacing it with "Key" or "Value"
-            // as a Dictionary always has 1 of each
-            comAllCus.DataSource = new BindingSource(comboVals,null);
-            // These controls work on any other form field that only shows 1 value at a time
-            //comAllCus.DisplayMember = "ToString"; // MAY BE IMPLICIT NOWADAYS
+            comAllCus.DataSource = CustomerDAL.Get(); 
             comAllCus.ValueMember = "CusID";
+            comAllCus.DisplayMember = "";
         }
     }
 }

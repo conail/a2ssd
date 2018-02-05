@@ -54,7 +54,7 @@ namespace a2ssdqub
             // to ensure both the key and value are available
             // instead of replacing it with "Key" or "Value"
             // as a Dictionary always has 1 of each
-            comCustomer.DataSource = CustomerDAL.GetListOfCustomers();
+            comCustomer.DataSource = CustomerDAL.Get();
             // These controls work on any other form field that only shows 1 value at a time
             // comCustomer.DisplayMember = "Value";
             comCustomer.ValueMember = "CusID";
