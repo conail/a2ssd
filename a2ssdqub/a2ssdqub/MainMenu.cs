@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace a2ssdqub
@@ -17,37 +10,21 @@ namespace a2ssdqub
             InitializeComponent();
         }
 
-        private void btnAddCus_Click(object sender, EventArgs e)
+        private void openSubForm(object sender, EventArgs e)
         {
             Hide();
-            AddNewCustomer addNewC = new AddNewCustomer();
-            addNewC.Show();
-        }
-
-        private void btnDelCus_Click(object sender, EventArgs e)
-        {
-            Hide();
-            DeleteCustomer delC = new DeleteCustomer();
-            delC.Show();
+            switch(((Control) sender).Name)
+            {
+                case "btnAddCus": (new AddNewCustomer()).Show(); break;
+                case "btnDelCus": (new DeleteCustomer()).Show(); break;
+                case "btnAddReceipt": (new frmAddNewReceipt()).Show(); break;
+                case "button1": (new UpdateCustomer()).Show(); break;
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Hide();
-            UpdateCustomer updateC = new UpdateCustomer();
-            updateC.Show();
-        }
-
-        private void btnAddReceipt_Click(object sender, EventArgs e)
-        {
-            Hide();
-            frmAddNewReceipt addRec = new frmAddNewReceipt();
-            addRec.Show();
         }
     }
 }

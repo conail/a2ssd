@@ -55,7 +55,7 @@
             this.btnAddCus.TabIndex = 1;
             this.btnAddCus.Text = "Add A New Customer";
             this.btnAddCus.UseVisualStyleBackColor = true;
-            this.btnAddCus.Click += new System.EventHandler(this.btnAddCus_Click);
+            this.btnAddCus.Click += new System.EventHandler(this.openSubForm);
             // 
             // btnDelCus
             // 
@@ -65,7 +65,7 @@
             this.btnDelCus.TabIndex = 2;
             this.btnDelCus.Text = "Delete A Customer";
             this.btnDelCus.UseVisualStyleBackColor = true;
-            this.btnDelCus.Click += new System.EventHandler(this.btnDelCus_Click);
+            this.btnDelCus.Click += new System.EventHandler(this.openSubForm);
             // 
             // btnExit
             // 
@@ -85,7 +85,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Update A Customer\'s Details";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.openSubForm);
             // 
             // btnAddReceipt
             // 
@@ -95,7 +95,7 @@
             this.btnAddReceipt.TabIndex = 5;
             this.btnAddReceipt.Text = "Add A Receipt";
             this.btnAddReceipt.UseVisualStyleBackColor = true;
-            this.btnAddReceipt.Click += new System.EventHandler(this.btnAddReceipt_Click);
+            this.btnAddReceipt.Click += new System.EventHandler(this.openSubForm);
             // 
             // MainMenu
             // 
