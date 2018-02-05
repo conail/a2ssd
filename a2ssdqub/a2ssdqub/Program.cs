@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace a2ssdqub
 {
     static class Program
     {
-        public static MainMenu mainM;
+        public static UI.MainMenu mainM;
 
         /// <summary>
         /// The main entry point for the application.
@@ -19,7 +16,7 @@ namespace a2ssdqub
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             SetupDataDirectoryPath();
-            mainM = new MainMenu();
+            mainM = new UI.MainMenu();
             Application.Run(mainM);
         }
 

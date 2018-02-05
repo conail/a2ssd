@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace a2ssdqub
+namespace a2ssdqub.UI
 {
     public partial class MainMenu : Form
     {

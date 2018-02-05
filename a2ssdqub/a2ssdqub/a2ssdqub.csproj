@@ -60,52 +60,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddNewCustomer.cs">
+    <Compile Include="UI\AddNewCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddNewCustomer.Designer.cs">
+    <Compile Include="UI\AddNewCustomer.Designer.cs">
       <DependentUpon>AddNewCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddNewReceipt.cs">
+    <Compile Include="UI\AddNewReceipt.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddNewReceipt.Designer.cs">
+    <Compile Include="UI\AddNewReceipt.Designer.cs">
       <DependentUpon>AddNewReceipt.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\CustomerDAL.cs" />
     <Compile Include="DAL\ReceiptsDAL.cs" />
-    <Compile Include="DeleteCustomer.cs">
+    <Compile Include="UI\DeleteCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DeleteCustomer.Designer.cs">
+    <Compile Include="UI\DeleteCustomer.Designer.cs">
       <DependentUpon>DeleteCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainMenu.cs">
+    <Compile Include="UI\MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainMenu.Designer.cs">
+    <Compile Include="UI\MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Receipt.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UpdateCustomer.cs">
+    <Compile Include="UI\UpdateCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateCustomer.Designer.cs">
+    <Compile Include="UI\UpdateCustomer.Designer.cs">
       <DependentUpon>UpdateCustomer.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddNewCustomer.resx">
+    <EmbeddedResource Include="UI\AddNewCustomer.resx">
       <DependentUpon>AddNewCustomer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddNewReceipt.resx">
+    <EmbeddedResource Include="UI\AddNewReceipt.resx">
       <DependentUpon>AddNewReceipt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DeleteCustomer.resx">
+    <EmbeddedResource Include="UI\DeleteCustomer.resx">
       <DependentUpon>DeleteCustomer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainMenu.resx">
+    <EmbeddedResource Include="UI\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -117,7 +117,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UpdateCustomer.resx">
+    <EmbeddedResource Include="UI\UpdateCustomer.resx">
       <DependentUpon>UpdateCustomer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

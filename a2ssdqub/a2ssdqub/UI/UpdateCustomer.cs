@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using a2ssdqub.Models;
 
-namespace a2ssdqub
+namespace a2ssdqub.UI
 {
     public partial class UpdateCustomer : Form
     {

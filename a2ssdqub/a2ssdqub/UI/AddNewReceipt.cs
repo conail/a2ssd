@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using a2ssdqub.DAL;
 using a2ssdqub.Models;
 
-namespace a2ssdqub
+namespace a2ssdqub.UI
 {
     public partial class frmAddNewReceipt : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace a2ssdqub
+﻿namespace a2ssdqub.UI
 {
     partial class DeleteCustomer
     {

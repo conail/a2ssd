@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using a2ssdqub.DAL;
-using a2ssdqub.Models; // ! //
 
-namespace a2ssdqub
+namespace a2ssdqub.UI
 {
     public partial class DeleteCustomer : Form
     {
