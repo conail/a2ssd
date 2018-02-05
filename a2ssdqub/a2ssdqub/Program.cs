@@ -20,17 +20,16 @@ namespace a2ssdqub
             Application.Run(mainM);
         }
 
-/*
- * Overwrite the DataDirectory with the
- * solution-level database location
- * which is the folder above the bin folder
- * (and the solution runs from the bin folder)
- */
+        /// <summary>
+        /// Overwrite the DataDirectory with the solution-level database location,
+        /// which is the folder above the bin folder when the solution runs from. 
+        /// </summary>
         private static void SetupDataDirectoryPath()
         {
-            string debugPath = System.IO.Path.GetDirectoryName(Environment.CurrentDirectory);
-            string dataDirectoryPath = System.IO.Path.GetDirectoryName(debugPath);
-            AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectoryPath);
+            string path = Environment.CurrentDirectory;
+            for (int i = 0; i < 2; i++) path = System.IO.Path.GetDirectoryName(path);
+
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
         }
     }
 }
