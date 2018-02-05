@@ -21,7 +21,7 @@ namespace a2ssdqub.DAL
                     INSERT INTO CUSTOMERS 
                     OUTPUT INSERTED.CustID 
                     VALUES('{0}','{1}','{2}');", 
-                    customer.Fname, customer.GetFormattedDate(), customer.Sex);
+                    customer.Forename, customer.GetFormattedDate(), customer.Sex);
 
                 var command = new SqlCommand(query, connection);
 
@@ -41,8 +41,8 @@ namespace a2ssdqub.DAL
                 var query = string.Format(@"UPDATE CUSTOMERS 
                     SET Forename = '{0}', DoB = '{1}', Gender = '{2}' 
                     WHERE CustID = '{3}';", 
-                    customer.Fname, customer.Dob, customer.Sex, 
-                    customer.CusID);
+                    customer.Forename, customer.Dob, customer.Sex, 
+                    customer.Id);
             
                 int rowsAffected = (new SqlCommand(query, connection)).ExecuteNonQuery();
 

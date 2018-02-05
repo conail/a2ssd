@@ -10,31 +10,31 @@ namespace a2ssdqub.Models
     {
         // Instance variables, as Properties
         // VISIBILITY MODIFIER??????????????????????? - private??
-        public int CusID { get; set; }
-        public string Fname { get; set; }
+        public int Id { get; set; }
+        public string Forename { get; set; }
         public DateTime Dob { get; set; }
         public string Sex { get; set; }
 
         /*
          * This is used when creating CUSTOMER objects/records
          */
-        public Customer(string fnameP, DateTime dobP, string sexP)
+        public Customer(string forename, DateTime dob, string sex)
         {
             // CusID will be auto-generated
-            Fname = fnameP;
-            Dob = dobP;
-            Sex = sexP;
+            Forename = forename;
+            Dob = dob;
+            Sex = sex;
         }
 
         /*
          * This is used when retrieving CUSTOMER records as objects
          */
-        public Customer(int cusIDP, string fnameP, DateTime dobP, string sexP)
+        public Customer(int id, string forename, DateTime dob, string sex)
         {
-            CusID = cusIDP;
-            Fname = fnameP;
-            Dob = dobP;
-            Sex = sexP;
+            Id = id;
+            Forename = forename;
+            Dob = dob;
+            Sex = sex;
         }
 
         public Customer()
@@ -46,13 +46,13 @@ namespace a2ssdqub.Models
         // Formatting dates into strings
         public string GetFormattedDate()
         {
-            return string.Format("{0:dd/MM/yyyy}",Dob);
+            return string.Format("{0:dd/MM/yyyy}", Dob);
         }
 
 
         public override string ToString()
         {
-            return string.Format("{0}, {1}, {2}, {3}", CusID, Fname, GetFormattedDate(), Sex);
+            return string.Format("{0}, {1}, {2}, {3}", Id, Forename, GetFormattedDate(), Sex);
         }
 
     }

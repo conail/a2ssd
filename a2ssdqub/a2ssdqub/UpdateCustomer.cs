@@ -39,7 +39,7 @@ namespace a2ssdqub
             lblCusID.Text = lisCus.SelectedValue.ToString();
 
             var customer = CustomerDAL.Get((int) lisCus.SelectedValue);
-            txtForename.Text = customer.Fname;
+            txtForename.Text = customer.Forename;
             dtpDob.Value = customer.Dob;
             panForm.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Text == customer.Sex).Checked = true;
             
@@ -49,7 +49,7 @@ namespace a2ssdqub
         private void button2_Click(object sender, EventArgs e)
         {
             var customer = (Customer) lisCus.SelectedItem;
-            customer.Fname = txtForename.Text;
+            customer.Forename = txtForename.Text;
             customer.Dob = dtpDob.Value;
             customer.Sex = panForm.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
 
