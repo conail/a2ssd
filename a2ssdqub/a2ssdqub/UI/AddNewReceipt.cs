@@ -24,7 +24,7 @@ namespace a2ssdqub.UI
                 return;
             }
 
-            var r = new Receipt(dtpDateIssue.Value, Decimal.Parse(txtTotalDue.Text), comPay.Text, false, null);
+            var r = new Receipt(dtpDateIssue.Value, Decimal.Parse(txtTotalDue.Text), comPay.Text, false, null, null);
             int? id = ReceiptDAL.Add(r);
 
             if (id > 0)

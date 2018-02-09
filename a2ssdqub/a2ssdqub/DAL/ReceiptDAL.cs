@@ -17,14 +17,22 @@ namespace a2ssdqub.DAL
                 connection.Open();
 
                 var cmd = new SqlCommand(@"
-                    SELECT DateIssued, TotalDue, PaymentMethod, CusToBill, RecId  
-                    FROM Receipts 
-                    ORDER BY RecId;", 
+                    SELECT r.DateIssued, r.TotalDue, r.PaymentMethod, r.CusToBill, r.RecID,
+                        c.Forename, c.DoB, c.Gender, c.CustID
+                    FROM Receipts r 
+                    INNER JOIN Customers c ON c.CustID = r.CusToBill 
+                    ORDER BY r.RecId;", 
                 connection);
 
                 var r = cmd.ExecuteReader();
 
-                while (r.Read()) list.Add(new Receipt(r.GetDateTime(0), r.GetDecimal(1), r.GetString(2), true, r.GetInt32(4)));
+                while (r.Read())
+                {
+                    var c = new Customer(r.GetInt32(8), r.GetString(5), r.GetDateTime(6), r.GetString(7));
+                    var q = new Receipt(r.GetDateTime(0), r.GetDecimal(1), r.GetString(2), true, r.GetInt32(4), c);
+
+                    list.Add(q);
+                }
 
                 connection.Close();
                 return list;
