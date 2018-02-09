@@ -9,11 +9,6 @@ namespace a2ssdqub.UI
         public DeleteCustomer()
         {
             InitializeComponent();
-
-        }
-
-        private void DeleteCustomer_Load(object sender, EventArgs e)
-        {
             refreshCombo();
         }
 
@@ -26,17 +21,14 @@ namespace a2ssdqub.UI
         private void btnDelCus_Click(object sender, EventArgs e)
         {
             CustomerDAL.Delete((int) comAllCus.SelectedValue);
-
-            // comAllCus.SelectedValue would give just the cusID
             MessageBox.Show("YOU HAVE JUST DELETED " + comAllCus.Text);
-
             refreshCombo();
         }
 
         private void refreshCombo()
         {
             comAllCus.DataSource = CustomerDAL.Get(); 
-            comAllCus.ValueMember = "CusID";
+            comAllCus.ValueMember = "Id";
             comAllCus.DisplayMember = "";
         }
     }

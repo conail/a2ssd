@@ -96,7 +96,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DeleteCustomer";
             this.Text = "Delete A Customer";
-            this.Load += new System.EventHandler(this.DeleteCustomer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
