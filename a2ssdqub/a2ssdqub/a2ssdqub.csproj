@@ -73,7 +73,13 @@
       <DependentUpon>AddNewReceipt.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\CustomerDAL.cs" />
-    <Compile Include="DAL\ReceiptsDAL.cs" />
+    <Compile Include="DAL\ReceiptDAL.cs" />
+    <Compile Include="UI\DeleteReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\DeleteReceipt.Designer.cs">
+      <DependentUpon>DeleteReceipt.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\DeleteCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AddNewReceipt.resx">
       <DependentUpon>AddNewReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\DeleteReceipt.resx">
+      <DependentUpon>DeleteReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DeleteCustomer.resx">
       <DependentUpon>DeleteCustomer.cs</DependentUpon>

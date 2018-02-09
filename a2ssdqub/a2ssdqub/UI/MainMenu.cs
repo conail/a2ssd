@@ -19,6 +19,7 @@ namespace a2ssdqub.UI
                 case "btnDelCus": (new DeleteCustomer()).Show(); break;
                 case "btnAddReceipt": (new frmAddNewReceipt()).Show(); break;
                 case "button1": (new UpdateCustomer()).Show(); break;
+                case "button2": (new DeleteReceipt()).Show(); break; 
             }
         }
 

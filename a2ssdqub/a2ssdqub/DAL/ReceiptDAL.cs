@@ -1,12 +1,35 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using a2ssdqub.Models;
 
 namespace a2ssdqub.DAL
 {
-    public class ReceiptsDAL
+    public class ReceiptDAL
     {
         private static string _connectionString = ConfigurationManager.ConnectionStrings["konekt"].ConnectionString;
+
+        public static List<Receipt> Get()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var list = new List<Receipt>();
+                connection.Open();
+
+                var cmd = new SqlCommand(@"
+                    SELECT DateIssued, TotalDue, PaymentMethod, CusToBill, RecId  
+                    FROM Receipts 
+                    ORDER BY RecId;", 
+                connection);
+
+                var r = cmd.ExecuteReader();
+
+                while (r.Read()) list.Add(new Receipt(r.GetDateTime(0), r.GetDecimal(1), r.GetString(2), true, r.GetInt32(4)));
+
+                connection.Close();
+                return list;
+            }
+        }
 
         public static int? Add(Receipt r)
         {
